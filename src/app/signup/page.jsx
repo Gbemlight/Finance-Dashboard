@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { account, ID } from "/lib/appwrite"; // uses the connected instance
+import { ID } from "appwrite";
+import { account } from "../appwrite"; // Corrected import path
 import { Eye, EyeOff } from "lucide-react";
 import { useUser } from "../../../components/UserContext";
-import profilePic from "/assets/Image1.png";
-import logo from "/assets/Exclude.png";
+import profilePic from "../../../assets/Image1.png";
+import logo from "../../../assets/Exclude.png";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +52,10 @@ export default function SignupPage() {
     try {
       // Create new user in Appwrite
       await account.create(ID.unique(), email, password, fullName);
-
-      // Automatically sign in after creating the account
+      
+      // Log the user in to create a session
       await account.createEmailPasswordSession(email, password);
-
-      // Fetch the new user's data and update the context
-      const currentUser = await account.get();
-      setUser(currentUser);
-      // Navigate to the dashboard using Next.js router
+      
       router.push("/dashboard");
     } catch (err) {
       if (err.message.includes("already exists")) {
@@ -175,6 +172,7 @@ export default function SignupPage() {
               src={profilePic}
               alt="Hand holding clock"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
               priority
             />
