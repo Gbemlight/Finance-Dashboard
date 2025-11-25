@@ -18,6 +18,7 @@
 
 // lib/appwrite.js
 
+"use client";
 
 import { Client, Account, ID } from "appwrite";
 
