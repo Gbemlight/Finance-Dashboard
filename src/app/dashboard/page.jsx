@@ -14,8 +14,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import Vector from "/assets/vector.png";
-import wallet from "/assets/wallet.png";
+// import Vector from "../../assets/vector.png";
+// import wallet from "/assets/wallet.png";
 
 const chartData = [
   { date: "Apr 14", income: 4500, expenses: 3200 },
